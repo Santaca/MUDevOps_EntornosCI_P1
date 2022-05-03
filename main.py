@@ -8,9 +8,9 @@ import sys
 
 DEFAULT_FILENAME = "words.txt"
 DEFAULT_DUPLICATES = False
+DEFAULT_ORDER = True
 
-
-def sort_list(items, ascending=True):
+def sort_list(items, ascending):
     if not isinstance(items, list):
         raise RuntimeError(f"No puede ordenar {type(items)}")
 
@@ -24,7 +24,8 @@ def remove_duplicates_from_list(items):
 if __name__ == "__main__":
     filename = DEFAULT_FILENAME
     remove_duplicates = DEFAULT_DUPLICATES
-    if len(sys.argv) == 3:
+    sortOrder = sys.argv[3] if len(sys.argv) == 4 else DEFAULT_ORDER
+    if len(sys.argv) >= 3:
         filename = sys.argv[1]
         remove_duplicates = sys.argv[2].lower() == "yes"
     else:
@@ -46,4 +47,4 @@ if __name__ == "__main__":
     if remove_duplicates:
         word_list = remove_duplicates_from_list(word_list)
 
-    print(sort_list(word_list))
+    print(sort_list(items=word_list, ascending=sortOrder))
